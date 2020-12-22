@@ -1,4 +1,6 @@
 # UNIX Network Programming
 UNIX网络编程的练习
+参考书籍：
+《Unix/Linux编程实践教程》
+《UNIX网络编程》
 
-#20201214 实现一个简陋的C/S程序
