@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <string.h>
 
 void do_ls(char[]);
 void dostat(char *);
@@ -65,7 +66,7 @@ void show_file_info(char * filename, struct stat * info_p)
 	void mode_to_letters();
 	char modestr[11];
 
-	mode_to_lettters(info_p->st_mode, modestr);
+	mode_to_letters(info_p->st_mode, modestr);
 
 	printf(" %s ", modestr);
 	printf(" %4d ", (int)info_p->st_nlink);
@@ -118,5 +119,30 @@ char * uid_to_name(uid_t uid)
 	struct passwd * getpwuid(), * pw_ptr;
 	static char numstr[10];
 
-	if ((pw_ptr = getpwuid(uid)))
+	if ((pw_ptr = getpwuid(uid)) == NULL)
+	{
+		sprintf(numstr, "%d", uid);
+		return numstr;
+	}
+	else
+		return pw_ptr->pw_name;
+}
+
+#include <grp.h>
+
+char * gid_to_name(gid_t gid)
+/*
+ * returns pointer to group number gid. used getgrgid(3)
+ */
+{
+	struct group * getgrgid(), * grp_ptr;
+	static char numstr[10];
+
+	if ((grp_ptr = getgrgid(gid)) == NULL)
+	{
+		sprintf(numstr, "%d", gid);
+		return numstr;
+	}
+	else
+		return grp_ptr->gr_name;
 }
