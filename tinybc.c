@@ -25,8 +25,13 @@
  */
 #include	<stdio.h>
 #include	<stdlib.h>
+#include	<unistd.h>
+#include	<sys/wait.h>
 
 #define	oops(m,x)	{perror(m);exit(x);}
+int be_dc(int in[2], int out[2]);
+int be_bc(int todc[2], int fromdc[2]);
+int fatal(char *mess[]);
 
 int main()
 {
@@ -49,7 +54,7 @@ int main()
 	}
 }
 
-be_dc(int in[2], int out[2])
+int be_dc(int in[2], int out[2])
 /*
  * set up stdin and stdout, then execl dc
  */
@@ -71,7 +76,7 @@ be_dc(int in[2], int out[2])
 	oops("Cannot run dc", 5);
 }
 
-be_bc(int todc[2], int fromdc[2])
+int be_bc(int todc[2], int fromdc[2])
 /*
  *	read from stdin and convert into to RPN, send down pipe
  *	then read from other pipe and print to user
@@ -113,7 +118,7 @@ be_bc(int todc[2], int fromdc[2])
 	fclose(fpin);							/* dc will see EOF */
 }
 
-fatal(char *mess[])
+int fatal(char *mess[])
 {
 	fprintf(stderr, "Error: %s\n", mess);
 	exit(1);
