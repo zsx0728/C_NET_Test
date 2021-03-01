@@ -44,7 +44,7 @@ int main()
 
 	root->left->left = createNewNode(4);
 	root->left->right = createNewNode(5);
-	root->left->right->left = ccreateNewNode(6);
+	root->left->right->left = createNewNode(6);
 	root->left->right->right = createNewNode(7);
 
 	if (isFullBinaryTree(root))
