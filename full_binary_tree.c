@@ -8,7 +8,7 @@ struct	Node
 {
 	int	item;
 	struct	Node	*left, *right;
-}
+};
 
 //Creation of new Node
 struct	Node	*createNewNode(char k)
