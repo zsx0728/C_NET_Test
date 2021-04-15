@@ -4,56 +4,41 @@
 
 char * longestCommonPrefix(char ** strs, int strsSize)
 {
-	int	count=0;			//计数
-	int	length=0, line_number=0;	//最短字符串的次序
-	char	* common_string;		//指向公共前缀
-	char	temp={0};
+	if (strsSize == 0)
+		return "";
+	char *common_str = (char *)malloc(200);
+	int i, j, flag = 0;
 
-	for (count = 0; count < strsSize; count++ )
+	strcpy(common_str, strs[0]);
+	for (i=0; i < strlen(strs[0]); i++)
 	{
-		if (count == 0)
-			length = strlen(*strs);
-		else if (count != 0 && strlen(*(strs+count)) < length)
+		for (j = 1;j < strsSize; j++)
 		{
-			length = strlen(*(strs+count));
-		}
-	}
-	printf("the length is %d\n", length);
-
-	//分配最短字符串长度的空间存储共享前缀
-	common_string = (char *)malloc(length);
-	
-	for (count = 0; count < length; count++)
-	{
-		printf("character is %c\n", *(*strs+count));
-		for (line_number = 0; line_number < strsSize; line_number++)
-		{
-			if (line_number == 0)
+			if (strs[j][i] != strs[0][i])
 			{
-				temp = *(*(strs+line_number)+count);
-			}
-			printf("line_number is %d, count is %d, temp is %c, *(*(strs+line_number)+count) is %c\n",line_number, count, temp, *(*(strs+line_number)+count));
-			strcpy(common_string+count, &temp);
-			if (temp == *(*(strs+line_number)+count))
-				printf(" == \n");
-			else
-			{
-				printf(" != \n");
-				return common_string;
+				common_str[i] = '\0';
+				flag = 1;
+				break;
 			}
 		}
+
+		if (flag == 1)
+			return common_str;
 	}
-	
+	return common_str;
 }
 
 int main(void)
 {
 	char * strs[3] = {"flower", "flow", "flight"};
+	//char * strs[3]={"dog","racecar","car"};
+	//char * strs[3]={""};
 	char * common_str;
 
 	common_str = longestCommonPrefix(strs,3);
-	for (int i =0;i<2;i++)
+	for (int i =0;i<strlen(common_str);i++)
 	{
-		printf("common_str is %c\n", *(common_str+i));
+		printf("%c", *(common_str+i));
 	}
+	printf("\n");
 }
