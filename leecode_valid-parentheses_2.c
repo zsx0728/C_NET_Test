@@ -18,7 +18,7 @@ bool isValid(char *s)
 		return false;
 	}
 
-	int stk[n + 1], top = 0;
+	int stk[n ], top = 0;
 	for (int i = 0; i < n; i++)
 	{
 		char ch = pairs(s[i]);
@@ -43,7 +43,7 @@ bool isValid(char *s)
 
 int main(void)
 {
-	char str[] = "{(][)}";
+	char str[] = "{()}][";
 	int i=0;
 	i = isValid(str);
 	printf("i is %d\n", i);
