@@ -8,6 +8,7 @@ int * plusOne(int * digits, int digitsSize, int * returnSize)
 		if (digits[i] < 9)
 		{
 			digits[i]++;
+			printf("i = %d, digits[i]++ = %d\n", i, digits[i]);
 			*returnSize = digitsSize;
 			return digits;
 		}
