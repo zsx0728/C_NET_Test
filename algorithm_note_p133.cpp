@@ -1,7 +1,7 @@
 #include	<stdio.h>
 #include	<math.h>
 const double PI = acos(-1.0); //PI
-const double eps = le-5;
+const double eps = 1e-5;
 double f(double R, double h)
 {
 	double alpha = 2 * acos((R - h) / R);
