@@ -1,4 +1,5 @@
 #define BLACK 0
+#define BLUE 1
 #define RED 4
 
 void write_string(char * pstring, int color)
